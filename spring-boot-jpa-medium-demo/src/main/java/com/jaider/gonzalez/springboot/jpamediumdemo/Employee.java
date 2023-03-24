@@ -1,5 +1,6 @@
-package com.jaider.gonzalez.modelo;
+package com.jaider.gonzalez.springboot.jpamediumdemo;
 import jakarta.persistence.*;
+import java.util.*;
 @Entity
 public class Employee {
 
@@ -11,11 +12,36 @@ public class Employee {
 	private String role;
 	private Double salary;
     
+    public Employee() {
+
+    }
     public Employee(String newFirstName, String newLastName, String newRole, double newSalary) {
         firstName = newFirstName;
         lastName = newLastName;
         role = newRole;
         salary = newSalary;
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return Objects.equals(employeeId, employee.employeeId) && Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName) && Objects.equals(role, employee.role) && Objects.equals(salary, employee.salary);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(employeeId, firstName, lastName, role, salary);
+    }
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "employeeId=" + employeeId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", role='" + role + '\'' +
+                ", salary=" + salary +
+                '}';
     }
     
     //getters
@@ -59,4 +85,5 @@ public class Employee {
     public void setSalary(Double newSalary) {
         salary = newSalary;
     }
+    
 }
